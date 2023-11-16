@@ -8,6 +8,7 @@ This service is especially useful for ski opensource learing projects.
 ## API server:
 
 https://skiresortsapi.onrender.com/resorts/czarna-gora
+
 https://skiresortsapi.onrender.com/resorts/zieleniec
 
 ## Current Resorsts
