@@ -13,7 +13,7 @@ const PORT = process.env.PORT;
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Welcome');
+  res.send('Hello!');
 });
 
 app.use('/resorts', router);
