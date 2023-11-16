@@ -28,8 +28,9 @@ https://skiresortsapi.onrender.com/resorts/zieleniec
 
 Before you begin, ensure you have met the following requirements:
 
-- Node.js installed on your machine. [Download Node.js](https://nodejs.org/)
+- Node.js installed on your machine.
 - Familiarity with JavaScript and Node.js basics.
+- Familiarity with MongoDB.
 
 ### Installation
 
@@ -37,5 +38,5 @@ Follow these steps to get your development environment set up:
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/[YourUsername]/[YourRepositoryName].git
+   git clone https://github.com/skibart/scraperWEB-API.git
    ```
