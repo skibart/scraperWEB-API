@@ -13,7 +13,8 @@ https://skiresortsapi.onrender.com/resorts/zieleniec
 
 ## Current Resorsts
 
-**Czarna Góra**:
+**Czarna Góra**
+**Zieleniec**
 
 ## Features
 
