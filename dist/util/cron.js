@@ -13,18 +13,22 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cronJobs = void 0;
-const node_cron_1 = __importDefault(require("node-cron"));
+const node_cron_1 = require("node-cron");
 const czarna_gora_1 = __importDefault(require("../resorts/czarna-gora"));
+const zielieniec_1 = __importDefault(require("../resorts/zielieniec"));
 const saveData_1 = __importDefault(require("../mongodb/saveData"));
-function getAndAddDataToDB(collectionName) {
+function getAndAddDataToDB(collectionName, resorts) {
     return __awaiter(this, void 0, void 0, function* () {
-        const dataToSave = yield (0, czarna_gora_1.default)();
+        const dataToSave = yield resorts();
         yield (0, saveData_1.default)(collectionName, dataToSave);
     });
 }
 function cronJobs() {
-    node_cron_1.default.schedule(`*/12 * * * *`, () => {
-        getAndAddDataToDB('czarna-gora');
+    (0, node_cron_1.schedule)(`*/12 * * * *`, () => {
+        getAndAddDataToDB('czarna-gora', czarna_gora_1.default);
+    });
+    (0, node_cron_1.schedule)(`*/12 * * * *`, () => {
+        getAndAddDataToDB('zieleniec', zielieniec_1.default);
     });
 }
 exports.cronJobs = cronJobs;

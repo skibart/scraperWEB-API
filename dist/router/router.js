@@ -25,4 +25,14 @@ router.get('/czarna-gora/', (req, res) => __awaiter(void 0, void 0, void 0, func
         res.status(500).json({ error: 'An error occurred while fetching weather data.' });
     }
 }));
+router.get('/zieleniec/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const zieleniec = yield (0, getFromMongoDb_1.default)('zieleniec');
+        res.json(zieleniec);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred while fetching weather data.' });
+    }
+}));
 exports.default = router;

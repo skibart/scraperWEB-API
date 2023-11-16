@@ -31,17 +31,13 @@ async function fetchCzarnaGoraData(): Promise<ReadyObj> {
           }
           //get slope length
           if (j === 3) {
-            const slopeLength = parseInt(
-              $(currentSelector).text().replace('Długość trasy', '').replace('m', '').trim(),
-              10,
-            );
+            const slopeLength = parseInt($(currentSelector).text().replace('Długość trasy', '').replace('m', '').trim(), 10);
             currentSlopeObj.length = slopeLength || 0;
           }
           //get slope status
           if (j === 6) {
             const slopeImgPath = currentSelector + ' > img:nth-child(2)';
-            const slopeStatus =
-              $(slopeImgPath).attr('src')?.split('/').pop()?.split('sm-')[1].split('.png')[0].trim() || '';
+            const slopeStatus = $(slopeImgPath).attr('src')?.split('/').pop()?.split('sm-')[1].split('.png')[0].trim() || '';
             currentSlopeObj.status = slopeStatus;
           }
         }

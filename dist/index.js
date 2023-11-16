@@ -13,7 +13,7 @@ const app = (0, express_1.default)();
 const PORT = process.env.PORT;
 app.use((0, morgan_1.default)(':method :url :status :res[content-length] - :response-time ms'));
 app.get('/', (req, res) => {
-    res.send('Welcome');
+    res.send('Hello!');
 });
 app.use('/resorts', router_1.default);
 (0, cron_1.cronJobs)();

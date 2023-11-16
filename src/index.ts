@@ -4,6 +4,7 @@ import router from './router/router';
 import dotenv from 'dotenv';
 import { cronJobs } from './util/cron';
 import morgan from 'morgan';
+import fetchZieleniec from './resorts/zielieniec';
 
 dotenv.config();
 
