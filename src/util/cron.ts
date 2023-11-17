@@ -14,7 +14,7 @@ function cronJobs() {
   schedule(`*/12 * * * *`, () => {
     getAndAddDataToDB('czarna-gora', fetchCzarnaGoraData);
   });
-  schedule(`*/12 * * * *`, () => {
+  schedule(`*/13 * * * *`, () => {
     getAndAddDataToDB('zieleniec', fetchZieleniec);
   });
 }
