@@ -11,44 +11,13 @@ function getSelector(trackId: number, column: number): string {
 async function fetchZieleniec(): Promise<ReadyObj> {
   try {
     const response = await axios.get('https://zieleniec.pl/trasy/');
-    const slopesArray: Slope[] = [];
-
-    if (response.status === 200) {
-      const $ = cheerio.load(response.data);
-      const trackIdArr = [
-        6, 5, 5, 6, 6, 5, 5, 1, 6, 1, 6, 1, 1, 1, 5, 5, 5, 6, 5, 6, 1, 1, 5, 5, 5, 5, 6, 5, 1, 1, 1, 1, 5, 5, 5, 5, 6,
-        1, 1, 5, 1, 5, 1, 5, 1, 5, 5,
-      ];
-
-      for (let i = 2; i <= 48; i++) {
-        const currentSlopeObj: Slope = {
-          name: '',
-          length: 0,
-          status: '',
-        };
-
-        const j = trackIdArr[i - 2];
-        const currentSelector = getSelector(i, j);
-
-        //get slope name
-        const slopeName = $(currentSelector).text();
-        currentSlopeObj.name = slopeName;
-        //get slope status
-        const slopeStatus = $(currentSelector).attr('class');
-        if (slopeStatus === 'redCell') {
-          currentSlopeObj.status = 'open';
-        } else {
-          currentSlopeObj.status = 'close';
-        }
-
-        //get slope length
-        const lengthSelector = getSelector(i, j + 1);
-        const slopeLength = $(lengthSelector).text().replace('m', '').trim();
-        currentSlopeObj.length = +slopeLength;
-
-        slopesArray.push(currentSlopeObj);
-      }
+    if (response.status !== 200) {
+      throw new Error('Failed to fetch data');
     }
+
+    const $ = cheerio.load(response.data);
+    const slopesArray: Slope[] = processSlopes($);
+
     return {
       slopes: slopesArray,
       dateEpoch: Date.now(),
@@ -60,4 +29,33 @@ async function fetchZieleniec(): Promise<ReadyObj> {
   }
 }
 
+function processSlopes($: Function): Slope[] {
+  const slopesArray: Slope[] = [];
+  const trackIdArr = [6, 5, 5, 6, 6, 5, 5, 1, 6, 1, 6, 1, 1, 1, 5, 5, 5, 6, 5, 6, 1, 1, 5, 5, 5, 5, 6, 5, 1, 1, 1, 1, 5, 5, 5, 5, 6, 1, 1, 5, 1, 5, 1, 5, 1, 5, 5];
+  const OPEN_STATUS = 'redCell';
+
+  for (let i = 2; i <= 48; i++) {
+    const j = trackIdArr[i - 2];
+    const currentSlope = createSlopeObj($, i, j, OPEN_STATUS);
+    slopesArray.push(currentSlope);
+  }
+  return slopesArray;
+}
+
+function createSlopeObj($: any, index: number, trackId: number, openStatus: string): Slope {
+  const currentSelector = getSelector(index, trackId);
+
+  const name = $(currentSelector).text();
+  const statusClass = $(currentSelector).attr('class');
+  const status = statusClass === openStatus ? 'open' : 'close';
+
+  const lengthSelector = getSelector(index, trackId + 1);
+  const length = parseInt($(lengthSelector).text().replace('m', '').trim(), 10);
+
+  return {
+    name: name,
+    length: length,
+    status: status,
+  };
+}
 export default fetchZieleniec;
