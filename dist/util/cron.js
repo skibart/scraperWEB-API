@@ -24,10 +24,10 @@ function getAndAddDataToDB(collectionName, resorts) {
     });
 }
 function cronJobs() {
-    (0, node_cron_1.schedule)(`30 9 * * *`, () => {
+    (0, node_cron_1.schedule)(`30 12 * * *`, () => {
         getAndAddDataToDB('czarna-gora', czarna_gora_1.default);
     });
-    (0, node_cron_1.schedule)(`40 9 * * *`, () => {
+    (0, node_cron_1.schedule)(`40 12 * * *`, () => {
         getAndAddDataToDB('zieleniec', zielieniec_1.default);
     });
 }

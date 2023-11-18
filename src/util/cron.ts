@@ -11,10 +11,10 @@ async function getAndAddDataToDB(collectionName: string, resorts: () => Promise<
 }
 
 function cronJobs() {
-  schedule(`30 9 * * *`, () => {
+  schedule(`30 12 * * *`, () => {
     getAndAddDataToDB('czarna-gora', fetchCzarnaGoraData);
   });
-  schedule(`40 9 * * *`, () => {
+  schedule(`40 12 * * *`, () => {
     getAndAddDataToDB('zieleniec', fetchZieleniec);
   });
 }

@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import { cronJobs } from './util/cron';
 import morgan from 'morgan';
 import fetchZieleniec from './resorts/zielieniec';
+import pingServer from './util/ping';
 
 dotenv.config();
 
@@ -18,6 +19,8 @@ app.get('/', (req: Request, res: Response) => {
 });
 
 app.use('/resorts', router);
+
+pingServer();
 
 cronJobs();
 
