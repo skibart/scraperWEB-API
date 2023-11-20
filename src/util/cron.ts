@@ -10,8 +10,6 @@ async function getAndAddDataToDB(collectionName: string, resorts: () => Promise<
   await saveToMongoDb(collectionName, dataToSave);
 }
 
-getAndAddDataToDB('zieleniec', fetchZieleniec);
-
 function cronJobs() {
   schedule(`30 12 * * *`, () => {
     getAndAddDataToDB('czarna-gora', fetchCzarnaGoraData);
