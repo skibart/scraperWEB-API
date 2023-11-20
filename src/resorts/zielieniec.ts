@@ -22,6 +22,10 @@ async function fetchZieleniec(): Promise<ReadyObj> {
       slopes: slopesArray,
       dateEpoch: Date.now(),
       dateLocal: new Date(),
+      name: 'Zieleniec Ski Arena',
+      img: '2.jpg',
+      region: 'slaskie',
+      id: 'zielieniec',
     };
   } catch (error: any) {
     console.error('Error:', error.message);

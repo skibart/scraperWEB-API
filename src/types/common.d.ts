@@ -5,6 +5,10 @@ interface Slope {
 }
 
 interface ReadyObj {
+  name: string;
+  id: string;
+  region: string;
+  img: string;
   slopes: Slope[];
   dateEpoch: number;
   dateLocal: Date;
