@@ -25,4 +25,16 @@ router.get('/zieleniec/', async (req: Request, res: Response) => {
   }
 });
 
+router.get('/all/', async (req: Request, res: Response) => {
+  try {
+    const zieleniec = await getFromMongoDb('zieleniec');
+    const czarnaGora = await getFromMongoDb('czarna-gora');
+    const returnObj = czarnaGora.concat(zieleniec);
+    res.json(returnObj);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while fetching weather data.' });
+  }
+});
+
 export default router;
