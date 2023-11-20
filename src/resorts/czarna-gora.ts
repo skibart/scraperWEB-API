@@ -46,7 +46,7 @@ async function fetchCzarnaGoraData(): Promise<ReadyObj> {
     }
 
     return {
-      slopes: slopesArray,
+      openSlopes: slopesArray,
       dateEpoch: Date.now(),
       dateLocal: new Date(),
       name: 'Czarna Górna',

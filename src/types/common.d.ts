@@ -9,7 +9,7 @@ interface ReadyObj {
   id: string;
   region: string;
   img: string;
-  slopes: Slope[];
+  openSlopes: Slope[];
   dateEpoch: number;
   dateLocal: Date;
 }

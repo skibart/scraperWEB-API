@@ -19,7 +19,7 @@ async function fetchZieleniec(): Promise<ReadyObj> {
     const slopesArray: Slope[] = processSlopes($);
 
     return {
-      slopes: slopesArray,
+      openSlopes: slopesArray,
       dateEpoch: Date.now(),
       dateLocal: new Date(),
       name: 'Zieleniec Ski Arena',

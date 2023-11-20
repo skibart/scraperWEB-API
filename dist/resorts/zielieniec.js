@@ -28,7 +28,7 @@ function fetchZieleniec() {
             const $ = cheerio_1.default.load(response.data);
             const slopesArray = processSlopes($);
             return {
-                slopes: slopesArray,
+                openSlopes: slopesArray,
                 dateEpoch: Date.now(),
                 dateLocal: new Date(),
                 name: 'Zieleniec Ski Arena',

@@ -9,12 +9,13 @@ async function getAndAddDataToDB(collectionName: string, resorts: () => Promise<
   const dataToSave: ReadyObj = await resorts();
   await saveToMongoDb(collectionName, dataToSave);
 }
+getAndAddDataToDB('czarna-gora', fetchCzarnaGoraData);
 
 function cronJobs() {
-  schedule(`30 12 * * *`, () => {
+  schedule(`33 11 * * *`, () => {
     getAndAddDataToDB('czarna-gora', fetchCzarnaGoraData);
   });
-  schedule(`40 12 * * *`, () => {
+  schedule(`35 11 * * *`, () => {
     getAndAddDataToDB('zieleniec', fetchZieleniec);
   });
 }
