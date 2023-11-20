@@ -58,6 +58,10 @@ function fetchCzarnaGoraData() {
                 slopes: slopesArray,
                 dateEpoch: Date.now(),
                 dateLocal: new Date(),
+                name: 'Czarna Górna',
+                img: '1.jpg',
+                region: 'slaskie',
+                id: 'czarna-gora',
             };
         }
         catch (error) {

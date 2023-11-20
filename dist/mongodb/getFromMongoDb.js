@@ -20,7 +20,7 @@ function getFromMongoDb(collectionName) {
             yield mongoClient_1.default.connect();
             const db = mongoClient_1.default.db(dbName);
             const collection = db.collection(collectionName);
-            const lastDocument = yield collection.find().sort({ $natural: -1 }).limit(2).toArray();
+            const lastDocument = yield collection.find().sort({ $natural: -1 }).limit(1).toArray();
             // await client.db('admin').command({ ping: 1 });
             // console.log('Pinged your deployment. You successfully connected to MongoDB!');
             return lastDocument;

@@ -31,6 +31,10 @@ function fetchZieleniec() {
                 slopes: slopesArray,
                 dateEpoch: Date.now(),
                 dateLocal: new Date(),
+                name: 'Zieleniec Ski Arena',
+                img: '2.jpg',
+                region: 'slaskie',
+                id: 'zielieniec',
             };
         }
         catch (error) {
