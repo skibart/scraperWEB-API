@@ -6,7 +6,7 @@ interface Slope {
 
 interface ReadyObj {
   name: string;
-  id: string;
+  resortId: string;
   region: string;
   img: string;
   openSlopes: Slope[];

@@ -25,7 +25,7 @@ async function fetchZieleniec(): Promise<ReadyObj> {
       name: 'Zieleniec Ski Arena',
       img: '2.jpg',
       region: 'slaskie',
-      id: 'zielieniec',
+      resortId: 'zielieniec',
     };
   } catch (error: any) {
     console.error('Error:', error.message);
