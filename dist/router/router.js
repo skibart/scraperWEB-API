@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const getFromMongoDb_1 = __importDefault(require("../mongodb/getFromMongoDb"));
+const promises_1 = __importDefault(require("fs/promises"));
 const router = express_1.default.Router();
 router.get('/czarna-gora/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -37,10 +38,12 @@ router.get('/zieleniec/', (req, res) => __awaiter(void 0, void 0, void 0, functi
 }));
 router.get('/all/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
+        const dummyData = yield promises_1.default.readFile('../data/dummy.json', { encoding: 'utf8' });
+        const dummy = JSON.parse(dummyData);
         const zieleniec = yield (0, getFromMongoDb_1.default)('zieleniec');
         const czarnaGora = yield (0, getFromMongoDb_1.default)('czarna-gora');
-        const returnObj = czarnaGora.concat(zieleniec);
-        res.json(returnObj);
+        const combinedData = [...czarnaGora, ...zieleniec, ...dummy];
+        res.json(combinedData);
     }
     catch (error) {
         console.error(error);
