@@ -42,7 +42,8 @@ router.get('/all/', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         const dummy1 = yield (0, getFromMongoDb_1.default)('dummy1');
         const dummy2 = yield (0, getFromMongoDb_1.default)('dummy2');
         const dummy3 = yield (0, getFromMongoDb_1.default)('dummy3');
-        const combinedData = [...czarnaGora, ...zieleniec, ...dummy1, ...dummy2, ...dummy3];
+        const szczyrk = yield (0, getFromMongoDb_1.default)('szczyrkowski');
+        const combinedData = [...czarnaGora, ...zieleniec, ...dummy1, ...dummy2, ...dummy3, ...szczyrk];
         res.json(combinedData);
     }
     catch (error) {

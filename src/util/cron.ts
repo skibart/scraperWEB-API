@@ -2,6 +2,7 @@ import { schedule } from 'node-cron';
 
 import fetchCzarnaGoraData from '../resorts/czarna-gora';
 import fetchZieleniec from '../resorts/zielieniec';
+import szczyrkowski from '../resorts/szczyrkowski';
 import saveToMongoDb from '../mongodb/saveData';
 import { ReadyObj } from '../types/common';
 
@@ -9,14 +10,16 @@ async function getAndAddDataToDB(collectionName: string, resorts: () => Promise<
   const dataToSave: ReadyObj = await resorts();
   await saveToMongoDb(collectionName, dataToSave);
 }
-getAndAddDataToDB('zieleniec', fetchZieleniec);
 
 function cronJobs() {
-  schedule(`37 12 * * *`, () => {
+  schedule(`01 10 * * *`, () => {
     getAndAddDataToDB('czarna-gora', fetchCzarnaGoraData);
   });
-  schedule(`38 12 * * *`, () => {
+  schedule(`02 10 * * *`, () => {
     getAndAddDataToDB('zieleniec', fetchZieleniec);
+  });
+  schedule(`03 10 * * *`, () => {
+    getAndAddDataToDB('szczyrkowski', szczyrkowski);
   });
 }
 
