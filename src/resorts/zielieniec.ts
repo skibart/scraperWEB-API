@@ -1,7 +1,7 @@
 import cheerio from 'cheerio';
 import axios from 'axios';
 
-import { ReadyObj, Slope } from '../types/common';
+import { ReadyObj, Slope, SlopeObj } from '../types/common';
 
 function getSelector(trackId: number, column: number): string {
   const selector = `#wyciagi > div:nth-child(1) > div:nth-child(1) > table:nth-child(1) > tbody:nth-child(1) > tr:nth-child(${trackId}) > td:nth-child(${column})`;
@@ -16,10 +16,12 @@ async function fetchZieleniec(): Promise<ReadyObj> {
     }
 
     const $ = cheerio.load(response.data);
-    const slopesArray: Slope[] = processSlopes($);
+    const slopesArray: SlopeObj = processSlopes($);
 
     return {
-      openSlopes: slopesArray,
+      openSlopes: slopesArray.slopes,
+      openSlopesQuantity: +slopesArray.openSlopesQuantity,
+      slopeQuantity: +slopesArray.slopeQuantity,
       dateEpoch: Date.now(),
       dateLocal: new Date(),
       name: 'Zieleniec Ski Arena',
@@ -33,8 +35,10 @@ async function fetchZieleniec(): Promise<ReadyObj> {
   }
 }
 
-function processSlopes($: Function): Slope[] {
+function processSlopes($: Function): SlopeObj {
   const slopesArray: Slope[] = [];
+  let openSlopesQuanity = 0;
+  let slopesQuantity = 0;
   const trackIdArr = [6, 5, 5, 6, 6, 5, 5, 1, 6, 1, 6, 1, 1, 1, 5, 5, 5, 6, 5, 6, 1, 1, 5, 5, 5, 5, 6, 5, 1, 1, 1, 1, 5, 5, 5, 5, 6, 1, 1, 5, 1, 5, 1, 5, 1, 5, 5];
   const OPEN_STATUS = 'redCell';
 
@@ -42,8 +46,18 @@ function processSlopes($: Function): Slope[] {
     const j = trackIdArr[i - 2];
     const currentSlope = createSlopeObj($, i, j, OPEN_STATUS);
     slopesArray.push(currentSlope);
+    if (currentSlope.status === 'open') {
+      openSlopesQuanity++;
+    }
+    slopesQuantity++;
   }
-  return slopesArray;
+  const slopeObject: SlopeObj = {
+    slopes: slopesArray,
+    slopeQuantity: slopesQuantity,
+    openSlopesQuantity: openSlopesQuanity,
+  };
+
+  return slopeObject;
 }
 
 function createSlopeObj($: any, index: number, trackId: number, openStatus: string): Slope {

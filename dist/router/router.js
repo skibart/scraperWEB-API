@@ -14,10 +14,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const getFromMongoDb_1 = __importDefault(require("../mongodb/getFromMongoDb"));
+const getOneDocumentPerDayFromMongoDb_1 = __importDefault(require("../mongodb/getOneDocumentPerDayFromMongoDb"));
 const router = express_1.default.Router();
 router.get('/czarna-gora/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const czarnaGora = yield (0, getFromMongoDb_1.default)('czarna-gora');
+        const czarnaGora = yield (0, getOneDocumentPerDayFromMongoDb_1.default)('czarna-gora');
         res.json(czarnaGora);
     }
     catch (error) {
@@ -27,8 +28,18 @@ router.get('/czarna-gora/', (req, res) => __awaiter(void 0, void 0, void 0, func
 }));
 router.get('/zieleniec/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const zieleniec = yield (0, getFromMongoDb_1.default)('zieleniec');
+        const zieleniec = yield (0, getOneDocumentPerDayFromMongoDb_1.default)('zieleniec');
         res.json(zieleniec);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred while fetching weather data.' });
+    }
+}));
+router.get('/szczyrkowski/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const szczyrkowski = yield (0, getOneDocumentPerDayFromMongoDb_1.default)('szczyrkowski');
+        res.json(szczyrkowski);
     }
     catch (error) {
         console.error(error);

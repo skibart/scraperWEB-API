@@ -14,18 +14,41 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoClient_1 = __importDefault(require("./mongoClient"));
 const dbName = 'resort';
-function getFromMongoDb(collectionName) {
+function getOneDocumentPerDayFromMongoDb(collectionName) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield mongoClient_1.default.connect();
+            const daysAgo = new Date();
+            daysAgo.setDate(daysAgo.getDate() - 14);
             const db = mongoClient_1.default.db(dbName);
             const collection = db.collection(collectionName);
-            const lastDocument = yield collection.find().sort({ $natural: -1 }).limit(1).toArray();
-            return lastDocument;
+            const documents = yield collection
+                .aggregate([
+                {
+                    $match: {
+                        dateLocal: { $gte: daysAgo },
+                    },
+                },
+                {
+                    $group: {
+                        _id: {
+                            year: { $year: '$dateLocal' },
+                            month: { $month: '$dateLocal' },
+                            day: { $dayOfMonth: '$dateLocal' },
+                        },
+                        document: { $first: '$$ROOT' },
+                    },
+                },
+                {
+                    $replaceRoot: { newRoot: '$document' },
+                },
+            ])
+                .toArray();
+            return documents;
         }
         finally {
             yield mongoClient_1.default.close();
         }
     });
 }
-exports.default = getFromMongoDb;
+exports.default = getOneDocumentPerDayFromMongoDb;

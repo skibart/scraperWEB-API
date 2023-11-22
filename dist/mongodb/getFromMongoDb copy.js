@@ -18,9 +18,12 @@ function getFromMongoDb(collectionName) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield mongoClient_1.default.connect();
+            const daysAgo = new Date();
+            daysAgo.setDate(daysAgo.getDate() - 10);
             const db = mongoClient_1.default.db(dbName);
             const collection = db.collection(collectionName);
-            const lastDocument = yield collection.find().sort({ $natural: -1 }).limit(1).toArray();
+            // const lastDocument = await collection.find().sort({ $natural: -1 }).limit(1).toArray();
+            const lastDocument = yield collection.find({ dateLocal: { $gte: daysAgo } }).toArray();
             return lastDocument;
         }
         finally {

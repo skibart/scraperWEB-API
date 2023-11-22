@@ -1,7 +1,7 @@
 import cheerio from 'cheerio';
 import axios from 'axios';
 
-import { ReadyObj, Slope } from '../types/common';
+import { ReadyObj, Slope, SlopeObj } from '../types/common';
 
 function getSelector(trackId: number, column: number): string {
   const selector = `div.container:nth-child(4) > div:nth-child(1) > div:nth-child(1) > table:nth-child(2) > tbody:nth-child(2) > tr:nth-child(${trackId}) > td:nth-child(${column})`;
@@ -12,6 +12,9 @@ async function fetchCzarnaGoraData(): Promise<ReadyObj> {
   try {
     const response = await axios.get('https://czarnagora.pl/komunikat-narciarski/');
     const slopesArray: Slope[] = [];
+
+    let openSlopesQuanity = 0;
+    let slopesQuantity = 0;
 
     if (response.status === 200) {
       const $ = cheerio.load(response.data);
@@ -39,6 +42,10 @@ async function fetchCzarnaGoraData(): Promise<ReadyObj> {
             const slopeImgPath = currentSelector + ' > img:nth-child(2)';
             const slopeStatus = $(slopeImgPath).attr('src')?.split('/').pop()?.split('sm-')[1].split('.png')[0].trim() || '';
             currentSlopeObj.status = slopeStatus;
+            if (currentSlopeObj.status === 'open') {
+              openSlopesQuanity++;
+            }
+            slopesQuantity++;
           }
         }
         slopesArray.push(currentSlopeObj);
@@ -47,6 +54,8 @@ async function fetchCzarnaGoraData(): Promise<ReadyObj> {
 
     return {
       openSlopes: slopesArray,
+      openSlopesQuantity: openSlopesQuanity,
+      slopeQuantity: slopesQuantity,
       dateEpoch: Date.now(),
       dateLocal: new Date(),
       name: 'Czarna Górna',

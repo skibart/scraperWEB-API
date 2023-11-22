@@ -28,7 +28,9 @@ function fetchZieleniec() {
             const $ = cheerio_1.default.load(response.data);
             const slopesArray = processSlopes($);
             return {
-                openSlopes: slopesArray,
+                openSlopes: slopesArray.slopes,
+                openSlopesQuantity: +slopesArray.openSlopesQuantity,
+                slopeQuantity: +slopesArray.slopeQuantity,
                 dateEpoch: Date.now(),
                 dateLocal: new Date(),
                 name: 'Zieleniec Ski Arena',
@@ -45,14 +47,25 @@ function fetchZieleniec() {
 }
 function processSlopes($) {
     const slopesArray = [];
+    let openSlopesQuanity = 0;
+    let slopesQuantity = 0;
     const trackIdArr = [6, 5, 5, 6, 6, 5, 5, 1, 6, 1, 6, 1, 1, 1, 5, 5, 5, 6, 5, 6, 1, 1, 5, 5, 5, 5, 6, 5, 1, 1, 1, 1, 5, 5, 5, 5, 6, 1, 1, 5, 1, 5, 1, 5, 1, 5, 5];
     const OPEN_STATUS = 'redCell';
     for (let i = 2; i <= 48; i++) {
         const j = trackIdArr[i - 2];
         const currentSlope = createSlopeObj($, i, j, OPEN_STATUS);
         slopesArray.push(currentSlope);
+        if (currentSlope.status === 'open') {
+            openSlopesQuanity++;
+        }
+        slopesQuantity++;
     }
-    return slopesArray;
+    const slopeObject = {
+        slopes: slopesArray,
+        slopeQuantity: slopesQuantity,
+        openSlopesQuantity: openSlopesQuanity,
+    };
+    return slopeObject;
 }
 function createSlopeObj($, index, trackId, openStatus) {
     const currentSelector = getSelector(index, trackId);

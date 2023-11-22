@@ -24,7 +24,9 @@ function szczyrkowski() {
             const $ = cheerio_1.default.load(response.data);
             const slopesArray = processSlopes($);
             return {
-                openSlopes: slopesArray,
+                openSlopes: slopesArray.slopes,
+                openSlopesQuantity: slopesArray.openSlopesQuantity,
+                slopeQuantity: slopesArray.slopeQuantity,
                 dateEpoch: Date.now(),
                 dateLocal: new Date(),
                 name: 'Szczyrkowski',
@@ -41,11 +43,22 @@ function szczyrkowski() {
 }
 function processSlopes($) {
     const slopesArray = [];
+    let openSlopesQuanity = 0;
+    let slopesQuantity = 0;
     for (let i = 1; i <= 20; i++) {
         const currentSlope = createSlopeObj($, i);
+        if (currentSlope.status === 'open') {
+            openSlopesQuanity++;
+        }
+        slopesQuantity++;
         slopesArray.push(currentSlope);
     }
-    return slopesArray;
+    const slopeObject = {
+        slopes: slopesArray,
+        slopeQuantity: slopesQuantity,
+        openSlopesQuantity: openSlopesQuanity,
+    };
+    return slopeObject;
 }
 function createSlopeObj($, index) {
     //status

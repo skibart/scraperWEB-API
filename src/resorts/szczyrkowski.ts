@@ -1,7 +1,7 @@
 import cheerio from 'cheerio';
 import axios from 'axios';
 
-import { ReadyObj, Slope } from '../types/common';
+import { ReadyObj, Slope, SlopeObj } from '../types/common';
 
 async function szczyrkowski(): Promise<ReadyObj> {
   try {
@@ -11,10 +11,12 @@ async function szczyrkowski(): Promise<ReadyObj> {
     }
 
     const $ = cheerio.load(response.data);
-    const slopesArray: Slope[] = processSlopes($);
+    const slopesArray: SlopeObj = processSlopes($);
 
     return {
-      openSlopes: slopesArray,
+      openSlopes: slopesArray.slopes,
+      openSlopesQuantity: slopesArray.openSlopesQuantity,
+      slopeQuantity: slopesArray.slopeQuantity,
       dateEpoch: Date.now(),
       dateLocal: new Date(),
       name: 'Szczyrkowski',
@@ -28,15 +30,26 @@ async function szczyrkowski(): Promise<ReadyObj> {
   }
 }
 
-function processSlopes($: Function): Slope[] {
+function processSlopes($: Function): SlopeObj {
   const slopesArray: Slope[] = [];
-
+  let openSlopesQuanity = 0;
+  let slopesQuantity = 0;
   for (let i = 1; i <= 20; i++) {
     const currentSlope = createSlopeObj($, i);
+    if (currentSlope.status === 'open') {
+      openSlopesQuanity++;
+    }
+    slopesQuantity++;
     slopesArray.push(currentSlope);
   }
 
-  return slopesArray;
+  const slopeObject: SlopeObj = {
+    slopes: slopesArray,
+    slopeQuantity: slopesQuantity,
+    openSlopesQuantity: openSlopesQuanity,
+  };
+
+  return slopeObject;
 }
 
 function createSlopeObj($: any, index: number): Slope {

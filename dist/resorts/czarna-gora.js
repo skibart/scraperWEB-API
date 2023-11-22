@@ -24,6 +24,8 @@ function fetchCzarnaGoraData() {
         try {
             const response = yield axios_1.default.get('https://czarnagora.pl/komunikat-narciarski/');
             const slopesArray = [];
+            let openSlopesQuanity = 0;
+            let slopesQuantity = 0;
             if (response.status === 200) {
                 const $ = cheerio_1.default.load(response.data);
                 for (let i = 1; i < 20; i++) {
@@ -49,6 +51,10 @@ function fetchCzarnaGoraData() {
                             const slopeImgPath = currentSelector + ' > img:nth-child(2)';
                             const slopeStatus = ((_b = (_a = $(slopeImgPath).attr('src')) === null || _a === void 0 ? void 0 : _a.split('/').pop()) === null || _b === void 0 ? void 0 : _b.split('sm-')[1].split('.png')[0].trim()) || '';
                             currentSlopeObj.status = slopeStatus;
+                            if (currentSlopeObj.status === 'open') {
+                                openSlopesQuanity++;
+                            }
+                            slopesQuantity++;
                         }
                     }
                     slopesArray.push(currentSlopeObj);
@@ -56,6 +62,8 @@ function fetchCzarnaGoraData() {
             }
             return {
                 openSlopes: slopesArray,
+                openSlopesQuantity: openSlopesQuanity,
+                slopeQuantity: slopesQuantity,
                 dateEpoch: Date.now(),
                 dateLocal: new Date(),
                 name: 'Czarna Górna',
