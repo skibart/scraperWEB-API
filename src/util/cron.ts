@@ -16,13 +16,13 @@ async function getAndAddDataToDB(collectionName: string, resorts: () => Promise<
 // getAndAddDataToDB('zieleniec', fetchZieleniec);
 
 function cronJobs() {
-  schedule(`01 10 * * *`, () => {
+  schedule(`46 18 * * *`, () => {
     getAndAddDataToDB('czarna-gora', fetchCzarnaGoraData);
   });
-  schedule(`02 10 * * *`, () => {
+  schedule(`47 18 * * *`, () => {
     getAndAddDataToDB('zieleniec', fetchZieleniec);
   });
-  schedule(`03 10 * * *`, () => {
+  schedule(`48 18 * * *`, () => {
     getAndAddDataToDB('szczyrkowski', szczyrkowski);
   });
 }

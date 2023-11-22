@@ -36,7 +36,7 @@ function fetchZieleniec() {
                 name: 'Zieleniec Ski Arena',
                 img: '2.jpg',
                 region: 'dolnoslaskie',
-                resortId: 'zielieniec',
+                resortId: 'zieleniec',
             };
         }
         catch (error) {

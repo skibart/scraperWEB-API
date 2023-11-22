@@ -28,13 +28,13 @@ function getAndAddDataToDB(collectionName, resorts) {
 // getAndAddDataToDB('czarna-gora', fetchCzarnaGoraData);
 // getAndAddDataToDB('zieleniec', fetchZieleniec);
 function cronJobs() {
-    (0, node_cron_1.schedule)(`01 10 * * *`, () => {
+    (0, node_cron_1.schedule)(`46 18 * * *`, () => {
         getAndAddDataToDB('czarna-gora', czarna_gora_1.default);
     });
-    (0, node_cron_1.schedule)(`02 10 * * *`, () => {
+    (0, node_cron_1.schedule)(`47 18 * * *`, () => {
         getAndAddDataToDB('zieleniec', zielieniec_1.default);
     });
-    (0, node_cron_1.schedule)(`03 10 * * *`, () => {
+    (0, node_cron_1.schedule)(`48 18 * * *`, () => {
         getAndAddDataToDB('szczyrkowski', szczyrkowski_1.default);
     });
 }
