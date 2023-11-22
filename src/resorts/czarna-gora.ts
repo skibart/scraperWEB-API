@@ -51,7 +51,7 @@ async function fetchCzarnaGoraData(): Promise<ReadyObj> {
       dateLocal: new Date(),
       name: 'Czarna Górna',
       img: '1.jpg',
-      region: 'slaskie',
+      region: 'dolnoslaskie',
       resortId: 'czarna-gora',
     };
   } catch (error: any) {

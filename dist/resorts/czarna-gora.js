@@ -60,7 +60,7 @@ function fetchCzarnaGoraData() {
                 dateLocal: new Date(),
                 name: 'Czarna Górna',
                 img: '1.jpg',
-                region: 'slaskie',
+                region: 'dolnoslaskie',
                 resortId: 'czarna-gora',
             };
         }
