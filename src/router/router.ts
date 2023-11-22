@@ -40,11 +40,8 @@ router.get('/all/', async (req: Request, res: Response) => {
   try {
     const zieleniec = await getFromMongoDb('zieleniec');
     const czarnaGora = await getFromMongoDb('czarna-gora');
-    const dummy1 = await getFromMongoDb('dummy1');
-    const dummy2 = await getFromMongoDb('dummy2');
-    const dummy3 = await getFromMongoDb('dummy3');
     const szczyrk = await getFromMongoDb('szczyrkowski');
-    const combinedData = [...czarnaGora, ...zieleniec, ...dummy1, ...dummy2, ...dummy3, ...szczyrk];
+    const combinedData = [...czarnaGora, ...zieleniec, ...szczyrk];
     res.json(combinedData);
   } catch (error) {
     console.error(error);
