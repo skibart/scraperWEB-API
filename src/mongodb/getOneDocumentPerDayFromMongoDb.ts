@@ -28,6 +28,13 @@ async function getOneDocumentPerDayFromMongoDb(collectionName: string) {
           },
         },
         {
+          $sort: {
+            '_id.year': 1, // Sort by year in ascending order
+            '_id.month': 1, // Then by month
+            '_id.day': 1, // Finally by day
+          },
+        },
+        {
           $replaceRoot: { newRoot: '$document' },
         },
       ])
