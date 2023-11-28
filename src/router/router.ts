@@ -2,18 +2,14 @@ import express from 'express';
 import { Request, Response } from 'express';
 import getFromMongoDb from '../mongodb/getFromMongoDb';
 import getOneDocumentPerDayFromMongoDb from '../mongodb/getOneDocumentPerDayFromMongoDb';
+import getFromMongoAll from '../mongodb/getFromMongoAll';
 
 const router = express.Router();
 
 router.get('/all/', async (req: Request, res: Response) => {
   try {
-    const zieleniec = await getFromMongoDb('zieleniec');
-    const czarnaGora = await getFromMongoDb('czarna-gora');
-    const szczyrk = await getFromMongoDb('szczyrkowski');
-    const cienkow = await getFromMongoDb('cienkow');
-    const plisko = await getFromMongoDb('plisko');
-    const combinedData = [...czarnaGora, ...zieleniec, ...szczyrk, ...cienkow, ...plisko];
-    res.json(combinedData);
+    const data = await getFromMongoAll();
+    res.json(data);
   } catch (error) {
     console.error(error);
     res.status(500).json({ error: 'An error occurred while fetching data.' });

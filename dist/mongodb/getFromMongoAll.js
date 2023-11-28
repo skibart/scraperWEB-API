@@ -14,18 +14,24 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const mongoClient_1 = __importDefault(require("./mongoClient"));
 const dbName = 'resort';
-function getFromMongoDb(collectionName) {
+function getFromMongoAll() {
     return __awaiter(this, void 0, void 0, function* () {
         try {
             yield mongoClient_1.default.connect();
             const db = mongoClient_1.default.db(dbName);
-            const collection = db.collection(collectionName);
-            const lastDocument = yield collection.find().sort({ $natural: -1 }).limit(1).toArray();
-            return lastDocument;
+            const collections = yield db.collections();
+            const lastDocuments = {};
+            for (const collection of collections) {
+                const lastDocument = yield collection.find().sort({ $natural: -1 }).limit(1).toArray();
+                if (lastDocument.length > 0) {
+                    lastDocuments[collection.collectionName] = lastDocument[0];
+                }
+            }
+            return lastDocuments;
         }
         finally {
             yield mongoClient_1.default.close();
         }
     });
 }
-exports.default = getFromMongoDb;
+exports.default = getFromMongoAll;

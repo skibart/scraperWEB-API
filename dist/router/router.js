@@ -13,18 +13,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const getFromMongoDb_1 = __importDefault(require("../mongodb/getFromMongoDb"));
 const getOneDocumentPerDayFromMongoDb_1 = __importDefault(require("../mongodb/getOneDocumentPerDayFromMongoDb"));
+const getFromMongoAll_1 = __importDefault(require("../mongodb/getFromMongoAll"));
 const router = express_1.default.Router();
 router.get('/all/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const zieleniec = yield (0, getFromMongoDb_1.default)('zieleniec');
-        const czarnaGora = yield (0, getFromMongoDb_1.default)('czarna-gora');
-        const szczyrk = yield (0, getFromMongoDb_1.default)('szczyrkowski');
-        const cienkow = yield (0, getFromMongoDb_1.default)('cienkow');
-        const plisko = yield (0, getFromMongoDb_1.default)('plisko');
-        const combinedData = [...czarnaGora, ...zieleniec, ...szczyrk, ...cienkow, ...plisko];
-        res.json(combinedData);
+        const data = yield (0, getFromMongoAll_1.default)();
+        res.json(data);
     }
     catch (error) {
         console.error(error);

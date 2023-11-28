@@ -19,6 +19,7 @@ const zielieniec_1 = __importDefault(require("../resorts/zielieniec"));
 const szczyrkowski_1 = __importDefault(require("../resorts/szczyrkowski"));
 const cienkow_1 = __importDefault(require("../resorts/cienkow"));
 const plisko_1 = __importDefault(require("../resorts/plisko"));
+const karpacz_1 = __importDefault(require("../resorts/karpacz"));
 const saveData_1 = __importDefault(require("../mongodb/saveData"));
 function getAndAddDataToDB(collectionName, resorts) {
     return __awaiter(this, void 0, void 0, function* () {
@@ -41,6 +42,9 @@ function cronJobs() {
     });
     (0, node_cron_1.schedule)(`50 10 * * *`, () => {
         getAndAddDataToDB('plisko', plisko_1.default);
+    });
+    (0, node_cron_1.schedule)(`51 10 * * *`, () => {
+        getAndAddDataToDB('karpacz', karpacz_1.default);
     });
 }
 exports.cronJobs = cronJobs;

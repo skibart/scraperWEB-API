@@ -5,6 +5,7 @@ import fetchZieleniec from '../resorts/zielieniec';
 import szczyrkowski from '../resorts/szczyrkowski';
 import cienkow from '../resorts/cienkow';
 import plisko from '../resorts/plisko';
+import karpacz from '../resorts/karpacz';
 import saveToMongoDb from '../mongodb/saveData';
 import { ReadyObj } from '../types/common';
 
@@ -28,6 +29,9 @@ function cronJobs() {
   });
   schedule(`50 10 * * *`, () => {
     getAndAddDataToDB('plisko', plisko);
+  });
+  schedule(`51 10 * * *`, () => {
+    getAndAddDataToDB('karpacz', karpacz);
   });
 }
 
