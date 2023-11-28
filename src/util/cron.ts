@@ -4,6 +4,7 @@ import fetchCzarnaGoraData from '../resorts/czarna-gora';
 import fetchZieleniec from '../resorts/zielieniec';
 import szczyrkowski from '../resorts/szczyrkowski';
 import cienkow from '../resorts/cienkow';
+import plisko from '../resorts/plisko';
 import saveToMongoDb from '../mongodb/saveData';
 import { ReadyObj } from '../types/common';
 
@@ -24,6 +25,9 @@ function cronJobs() {
   });
   schedule(`49 10 * * *`, () => {
     getAndAddDataToDB('cienkow', cienkow);
+  });
+  schedule(`50 10 * * *`, () => {
+    getAndAddDataToDB('plisko', plisko);
   });
 }
 
