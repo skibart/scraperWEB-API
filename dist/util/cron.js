@@ -27,6 +27,11 @@ function getAndAddDataToDB(collectionName, resorts) {
         yield (0, saveData_1.default)(collectionName, dataToSave);
     });
 }
+// async function testFunction() {
+//   const somelog = await jaworzna();
+//   console.log(somelog);
+// }
+// testFunction();
 function cronJobs() {
     (0, node_cron_1.schedule)(`46 10 * * *`, () => {
         getAndAddDataToDB('czarna-gora', czarna_gora_1.default);
@@ -42,6 +47,9 @@ function cronJobs() {
     });
     (0, node_cron_1.schedule)(`50 10 * * *`, () => {
         getAndAddDataToDB('plisko', plisko_1.default);
+    });
+    (0, node_cron_1.schedule)(`51 10 * * *`, () => {
+        getAndAddDataToDB('karpacz', karpacz_1.default);
     });
     (0, node_cron_1.schedule)(`51 10 * * *`, () => {
         getAndAddDataToDB('karpacz', karpacz_1.default);

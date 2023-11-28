@@ -6,6 +6,8 @@ import szczyrkowski from '../resorts/szczyrkowski';
 import cienkow from '../resorts/cienkow';
 import plisko from '../resorts/plisko';
 import karpacz from '../resorts/karpacz';
+import jaworzna from '../resorts/jaworzna';
+
 import saveToMongoDb from '../mongodb/saveData';
 import { ReadyObj } from '../types/common';
 
@@ -13,6 +15,12 @@ async function getAndAddDataToDB(collectionName: string, resorts: () => Promise<
   const dataToSave: ReadyObj = await resorts();
   await saveToMongoDb(collectionName, dataToSave);
 }
+
+// async function testFunction() {
+//   const somelog = await jaworzna();
+//   console.log(somelog);
+// }
+// testFunction();
 
 function cronJobs() {
   schedule(`46 10 * * *`, () => {
@@ -29,6 +37,9 @@ function cronJobs() {
   });
   schedule(`50 10 * * *`, () => {
     getAndAddDataToDB('plisko', plisko);
+  });
+  schedule(`51 10 * * *`, () => {
+    getAndAddDataToDB('karpacz', karpacz);
   });
   schedule(`51 10 * * *`, () => {
     getAndAddDataToDB('karpacz', karpacz);
