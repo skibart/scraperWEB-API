@@ -5,34 +5,14 @@ import getOneDocumentPerDayFromMongoDb from '../mongodb/getOneDocumentPerDayFrom
 
 const router = express.Router();
 
-router.get('/czarna-gora/', async (req: Request, res: Response) => {
+router.get('/:id', async (req, res) => {
   try {
-    const czarnaGora = await getOneDocumentPerDayFromMongoDb('czarna-gora');
-
-    res.json(czarnaGora);
+    const documentId = req.params.id;
+    const document = await getOneDocumentPerDayFromMongoDb(documentId);
+    res.json(document);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'An error occurred while fetching weather data.' });
-  }
-});
-
-router.get('/zieleniec/', async (req: Request, res: Response) => {
-  try {
-    const zieleniec = await getOneDocumentPerDayFromMongoDb('zieleniec');
-    res.json(zieleniec);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'An error occurred while fetching weather data.' });
-  }
-});
-
-router.get('/szczyrkowski/', async (req: Request, res: Response) => {
-  try {
-    const szczyrkowski = await getOneDocumentPerDayFromMongoDb('szczyrkowski');
-    res.json(szczyrkowski);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'An error occurred while fetching weather data.' });
+    res.status(500).json({ error: 'An error occurred while fetching the document.' });
   }
 });
 

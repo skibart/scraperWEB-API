@@ -16,34 +16,15 @@ const express_1 = __importDefault(require("express"));
 const getFromMongoDb_1 = __importDefault(require("../mongodb/getFromMongoDb"));
 const getOneDocumentPerDayFromMongoDb_1 = __importDefault(require("../mongodb/getOneDocumentPerDayFromMongoDb"));
 const router = express_1.default.Router();
-router.get('/czarna-gora/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const czarnaGora = yield (0, getOneDocumentPerDayFromMongoDb_1.default)('czarna-gora');
-        res.json(czarnaGora);
+        const documentId = req.params.id;
+        const document = yield (0, getOneDocumentPerDayFromMongoDb_1.default)(documentId);
+        res.json(document);
     }
     catch (error) {
         console.error(error);
-        res.status(500).json({ error: 'An error occurred while fetching weather data.' });
-    }
-}));
-router.get('/zieleniec/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const zieleniec = yield (0, getOneDocumentPerDayFromMongoDb_1.default)('zieleniec');
-        res.json(zieleniec);
-    }
-    catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'An error occurred while fetching weather data.' });
-    }
-}));
-router.get('/szczyrkowski/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const szczyrkowski = yield (0, getOneDocumentPerDayFromMongoDb_1.default)('szczyrkowski');
-        res.json(szczyrkowski);
-    }
-    catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'An error occurred while fetching weather data.' });
+        res.status(500).json({ error: 'An error occurred while fetching the document.' });
     }
 }));
 router.get('/all/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
