@@ -16,17 +16,6 @@ const express_1 = __importDefault(require("express"));
 const getFromMongoDb_1 = __importDefault(require("../mongodb/getFromMongoDb"));
 const getOneDocumentPerDayFromMongoDb_1 = __importDefault(require("../mongodb/getOneDocumentPerDayFromMongoDb"));
 const router = express_1.default.Router();
-router.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const documentId = req.params.id;
-        const document = yield (0, getOneDocumentPerDayFromMongoDb_1.default)(documentId);
-        res.json(document);
-    }
-    catch (error) {
-        console.error(error);
-        res.status(500).json({ error: 'An error occurred while fetching the document.' });
-    }
-}));
 router.get('/all/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const zieleniec = yield (0, getFromMongoDb_1.default)('zieleniec');
@@ -40,6 +29,17 @@ router.get('/all/', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     catch (error) {
         console.error(error);
         res.status(500).json({ error: 'An error occurred while fetching data.' });
+    }
+}));
+router.get('/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const documentId = req.params.id;
+        const document = yield (0, getOneDocumentPerDayFromMongoDb_1.default)(documentId);
+        res.json(document);
+    }
+    catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'An error occurred while fetching the document.' });
     }
 }));
 exports.default = router;
