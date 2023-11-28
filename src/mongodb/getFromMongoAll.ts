@@ -6,12 +6,12 @@ async function getFromMongoAll() {
     await client.connect();
     const db = client.db(dbName);
     const collections = await db.collections();
-    const lastDocuments = {};
+    const lastDocuments = [];
 
     for (const collection of collections) {
       const lastDocument = await collection.find().sort({ $natural: -1 }).limit(1).toArray();
       if (lastDocument.length > 0) {
-        lastDocuments[collection.collectionName] = lastDocument[0];
+        lastDocuments.push(lastDocument[0]);
       }
     }
 
