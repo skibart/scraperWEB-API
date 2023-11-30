@@ -5,11 +5,15 @@
 This Node.js script is designed to fetch real-time information about open slopes in ski resorts across Poland. Using Axios for HTTP requests, it retrieves data from various websites and presents it in an easily consumable JSON format.
 This service is especially useful for ski opensource learing projects.
 
-## API server:
+## Working :
+
+https://slopes-eb7d4.web.app/
+
+## API server e.g.:
 
 https://skiresortsapi.onrender.com/resorts/czarna-gora
 
-https://skiresortsapi.onrender.com/resorts/zieleniec
+https://skiresortsapi.onrender.com/resorts/all
 
 ## Current Resorsts
 
