@@ -6,8 +6,8 @@ import szczyrkowski from '../resorts/szczyrkowski';
 import cienkow from '../resorts/cienkow';
 import plisko from '../resorts/plisko';
 import karpacz from '../resorts/karpacz';
-import jaworzna from '../resorts/jaworzna';
-
+import bergregions from '../resorts/bergregions';
+import { tatrySuperSkiRegions } from '../resorts/tatrySuperSki';
 import saveToMongoDb from '../mongodb/saveData';
 import { ReadyObj } from '../types/common';
 
@@ -16,33 +16,34 @@ async function getAndAddDataToDB(collectionName: string, resorts: () => Promise<
   await saveToMongoDb(collectionName, dataToSave);
 }
 
-// async function testFunction() {
-//   const somelog = await jaworzna();
-//   console.log(somelog);
-// }
-// testFunction();
+async function TatrySuperSkiRegion() {
+  for (const item of tatrySuperSkiRegions) {
+    getAndAddDataToDB(item.resortId, () => bergregions(item));
+    await new Promise((resolve) => setTimeout(resolve, 20000));
+  }
+}
 
 function cronJobs() {
-  schedule(`46 10 * * *`, () => {
+  schedule(`45 10 * * *`, () => {
     getAndAddDataToDB('czarna-gora', fetchCzarnaGoraData);
   });
   schedule(`47 10 * * *`, () => {
     getAndAddDataToDB('zieleniec', fetchZieleniec);
   });
-  schedule(`48 10 * * *`, () => {
+  schedule(`49 10 * * *`, () => {
     getAndAddDataToDB('szczyrkowski', szczyrkowski);
   });
-  schedule(`49 10 * * *`, () => {
+  schedule(`51 10 * * *`, () => {
     getAndAddDataToDB('cienkow', cienkow);
   });
-  schedule(`50 10 * * *`, () => {
+  schedule(`53 10 * * *`, () => {
     getAndAddDataToDB('plisko', plisko);
   });
-  schedule(`51 10 * * *`, () => {
+  schedule(`55 10 * * *`, () => {
     getAndAddDataToDB('karpacz', karpacz);
   });
-  schedule(`51 10 * * *`, () => {
-    getAndAddDataToDB('karpacz', karpacz);
+  schedule(`59 10 * * *`, () => {
+    TatrySuperSkiRegion();
   });
 }
 
