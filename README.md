@@ -17,8 +17,7 @@ https://skiresortsapi.onrender.com/resorts/all
 
 ## Current Resorsts
 
-**Czarna Góra**
-**Zieleniec**
+check in all api
 
 ## Features
 
