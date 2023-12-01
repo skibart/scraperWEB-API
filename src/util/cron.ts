@@ -48,7 +48,7 @@ function cronJobs() {
   schedule(`55 10 * * *`, () => {
     getAndAddDataToDB('karpacz', karpacz);
   });
-  schedule(`25 13 * * *`, () => {
+  schedule(`35 13 * * *`, () => {
     TatrySuperSkiRegion();
   });
 }
