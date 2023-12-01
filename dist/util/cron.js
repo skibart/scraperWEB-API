@@ -37,6 +37,10 @@ function TatrySuperSkiRegion() {
         }
     });
 }
+// async function testOne() {
+//   getAndAddDataToDB(tatrySuperSkiRegions[1].resortId, () => bergregions(tatrySuperSkiRegions[1]));
+// }
+// testOne();
 function cronJobs() {
     (0, node_cron_1.schedule)(`45 10 * * *`, () => {
         getAndAddDataToDB('czarna-gora', czarna_gora_1.default);
@@ -56,7 +60,7 @@ function cronJobs() {
     (0, node_cron_1.schedule)(`55 10 * * *`, () => {
         getAndAddDataToDB('karpacz', karpacz_1.default);
     });
-    (0, node_cron_1.schedule)(`59 10 * * *`, () => {
+    (0, node_cron_1.schedule)(`25 13 * * *`, () => {
         TatrySuperSkiRegion();
     });
 }

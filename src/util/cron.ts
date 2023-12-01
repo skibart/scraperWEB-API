@@ -23,6 +23,12 @@ async function TatrySuperSkiRegion() {
   }
 }
 
+// async function testOne() {
+//   getAndAddDataToDB(tatrySuperSkiRegions[1].resortId, () => bergregions(tatrySuperSkiRegions[1]));
+// }
+
+// testOne();
+
 function cronJobs() {
   schedule(`45 10 * * *`, () => {
     getAndAddDataToDB('czarna-gora', fetchCzarnaGoraData);
@@ -42,7 +48,7 @@ function cronJobs() {
   schedule(`55 10 * * *`, () => {
     getAndAddDataToDB('karpacz', karpacz);
   });
-  schedule(`59 10 * * *`, () => {
+  schedule(`25 13 * * *`, () => {
     TatrySuperSkiRegion();
   });
 }

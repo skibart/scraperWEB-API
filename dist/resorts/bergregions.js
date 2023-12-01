@@ -37,7 +37,7 @@ exports.default = bergregions;
 function createObject(resortId, quanititySlopesRun) {
     return __awaiter(this, void 0, void 0, function* () {
         try {
-            const browser = yield puppeteer_1.default.launch({ headless: false });
+            const browser = yield puppeteer_1.default.launch({ headless: true });
             const page = yield browser.newPage();
             yield page.goto(BASE_URL + resortId);
             yield page.waitForTimeout(1000);

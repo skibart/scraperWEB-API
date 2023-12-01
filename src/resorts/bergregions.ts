@@ -23,7 +23,7 @@ export default async function bergregions(bergregionsArr: any): Promise<ReadyObj
 
 async function createObject(resortId: string, quanititySlopesRun: number) {
   try {
-    const browser = await puppeteer.launch({ headless: false });
+    const browser = await puppeteer.launch({ headless: true });
     const page = await browser.newPage();
     await page.goto(BASE_URL + resortId);
     await page.waitForTimeout(1000);
