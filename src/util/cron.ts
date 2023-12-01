@@ -30,25 +30,25 @@ async function TatrySuperSkiRegion() {
 // testOne();
 
 function cronJobs() {
-  schedule(`45 10 * * *`, () => {
+  schedule(`45 9 * * *`, () => {
     getAndAddDataToDB('czarna-gora', fetchCzarnaGoraData);
   });
-  schedule(`47 10 * * *`, () => {
+  schedule(`47 9 * * *`, () => {
     getAndAddDataToDB('zieleniec', fetchZieleniec);
   });
-  schedule(`49 10 * * *`, () => {
+  schedule(`49 9 * * *`, () => {
     getAndAddDataToDB('szczyrkowski', szczyrkowski);
   });
-  schedule(`51 10 * * *`, () => {
+  schedule(`51 9 * * *`, () => {
     getAndAddDataToDB('cienkow', cienkow);
   });
-  schedule(`53 10 * * *`, () => {
+  schedule(`53 9 * * *`, () => {
     getAndAddDataToDB('plisko', plisko);
   });
-  schedule(`55 10 * * *`, () => {
+  schedule(`55 9 * * *`, () => {
     getAndAddDataToDB('karpacz', karpacz);
   });
-  schedule(`35 13 * * *`, () => {
+  schedule(`45 13 * * *`, () => {
     TatrySuperSkiRegion();
   });
 }

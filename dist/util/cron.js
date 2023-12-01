@@ -42,25 +42,25 @@ function TatrySuperSkiRegion() {
 // }
 // testOne();
 function cronJobs() {
-    (0, node_cron_1.schedule)(`45 10 * * *`, () => {
+    (0, node_cron_1.schedule)(`45 9 * * *`, () => {
         getAndAddDataToDB('czarna-gora', czarna_gora_1.default);
     });
-    (0, node_cron_1.schedule)(`47 10 * * *`, () => {
+    (0, node_cron_1.schedule)(`47 9 * * *`, () => {
         getAndAddDataToDB('zieleniec', zielieniec_1.default);
     });
-    (0, node_cron_1.schedule)(`49 10 * * *`, () => {
+    (0, node_cron_1.schedule)(`49 9 * * *`, () => {
         getAndAddDataToDB('szczyrkowski', szczyrkowski_1.default);
     });
-    (0, node_cron_1.schedule)(`51 10 * * *`, () => {
+    (0, node_cron_1.schedule)(`51 9 * * *`, () => {
         getAndAddDataToDB('cienkow', cienkow_1.default);
     });
-    (0, node_cron_1.schedule)(`53 10 * * *`, () => {
+    (0, node_cron_1.schedule)(`53 9 * * *`, () => {
         getAndAddDataToDB('plisko', plisko_1.default);
     });
-    (0, node_cron_1.schedule)(`55 10 * * *`, () => {
+    (0, node_cron_1.schedule)(`55 9 * * *`, () => {
         getAndAddDataToDB('karpacz', karpacz_1.default);
     });
-    (0, node_cron_1.schedule)(`35 13 * * *`, () => {
+    (0, node_cron_1.schedule)(`45 13 * * *`, () => {
         TatrySuperSkiRegion();
     });
 }
