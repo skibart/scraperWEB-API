@@ -6,6 +6,7 @@ import szczyrkowski from '../resorts/szczyrkowski';
 import cienkow from '../resorts/cienkow';
 import plisko from '../resorts/plisko';
 import karpacz from '../resorts/karpacz';
+import jaworzna from '../resorts/jaworzna';
 import bergregions from '../resorts/bergregions';
 import { tatrySuperSkiRegions } from '../resorts/tatrySuperSki';
 import saveToMongoDb from '../mongodb/saveData';
@@ -23,9 +24,10 @@ async function TatrySuperSkiRegion() {
   }
 }
 
-// async function testOne() {
-//   getAndAddDataToDB(tatrySuperSkiRegions[1].resortId, () => bergregions(tatrySuperSkiRegions[1]));
-// }
+async function testOne() {
+  // getAndAddDataToDB(tatrySuperSkiRegions[1].resortId, () => bergregions(tatrySuperSkiRegions[1]));
+  // getAndAddDataToDB('zieleniec', fetchZieleniec);
+}
 
 // testOne();
 
@@ -48,9 +50,12 @@ function cronJobs() {
   schedule(`55 9 * * *`, () => {
     getAndAddDataToDB('karpacz', karpacz);
   });
-  schedule(`45 13 * * *`, () => {
-    TatrySuperSkiRegion();
+  schedule(`57 9 * * *`, () => {
+    getAndAddDataToDB('jaworzna', jaworzna);
   });
+  // schedule(`19 19 * * *`, () => {
+  //   TatrySuperSkiRegion();
+  // });
 }
 
 export { cronJobs };

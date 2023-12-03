@@ -20,6 +20,7 @@ const szczyrkowski_1 = __importDefault(require("../resorts/szczyrkowski"));
 const cienkow_1 = __importDefault(require("../resorts/cienkow"));
 const plisko_1 = __importDefault(require("../resorts/plisko"));
 const karpacz_1 = __importDefault(require("../resorts/karpacz"));
+const jaworzna_1 = __importDefault(require("../resorts/jaworzna"));
 const bergregions_1 = __importDefault(require("../resorts/bergregions"));
 const tatrySuperSki_1 = require("../resorts/tatrySuperSki");
 const saveData_1 = __importDefault(require("../mongodb/saveData"));
@@ -37,9 +38,12 @@ function TatrySuperSkiRegion() {
         }
     });
 }
-// async function testOne() {
-//   getAndAddDataToDB(tatrySuperSkiRegions[1].resortId, () => bergregions(tatrySuperSkiRegions[1]));
-// }
+function testOne() {
+    return __awaiter(this, void 0, void 0, function* () {
+        // getAndAddDataToDB(tatrySuperSkiRegions[1].resortId, () => bergregions(tatrySuperSkiRegions[1]));
+        // getAndAddDataToDB('zieleniec', fetchZieleniec);
+    });
+}
 // testOne();
 function cronJobs() {
     (0, node_cron_1.schedule)(`45 9 * * *`, () => {
@@ -60,8 +64,11 @@ function cronJobs() {
     (0, node_cron_1.schedule)(`55 9 * * *`, () => {
         getAndAddDataToDB('karpacz', karpacz_1.default);
     });
-    (0, node_cron_1.schedule)(`45 13 * * *`, () => {
-        TatrySuperSkiRegion();
+    (0, node_cron_1.schedule)(`57 9 * * *`, () => {
+        getAndAddDataToDB('jaworzna', jaworzna_1.default);
     });
+    // schedule(`19 19 * * *`, () => {
+    //   TatrySuperSkiRegion();
+    // });
 }
 exports.cronJobs = cronJobs;

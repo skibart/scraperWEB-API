@@ -50,12 +50,12 @@ function processSlopes($) {
     let openSlopesQuanity = 0;
     let slopesQuantity = 0;
     const trackIdArr = [6, 5, 5, 6, 6, 5, 5, 1, 6, 1, 6, 1, 1, 1, 5, 5, 5, 6, 5, 6, 1, 1, 5, 5, 5, 5, 6, 5, 1, 1, 1, 1, 5, 5, 5, 5, 6, 1, 1, 5, 1, 5, 1, 5, 1, 5, 5];
-    const OPEN_STATUS = 'redCell';
+    const OPEN_STATUS = 'greenCell';
     for (let i = 2; i <= 48; i++) {
         const j = trackIdArr[i - 2];
         const currentSlope = createSlopeObj($, i, j, OPEN_STATUS);
         slopesArray.push(currentSlope);
-        if (currentSlope.status === 'open') {
+        if (currentSlope.status === 'redCell') {
             openSlopesQuanity++;
         }
         slopesQuantity++;
@@ -71,7 +71,7 @@ function createSlopeObj($, index, trackId, openStatus) {
     const currentSelector = getSelector(index, trackId);
     const name = $(currentSelector).text();
     const statusClass = $(currentSelector).attr('class');
-    const status = statusClass === openStatus ? 'open' : 'close';
+    const status = statusClass.trim() === openStatus ? 'open' : 'close';
     const lengthSelector = getSelector(index, trackId + 1);
     const length = parseInt($(lengthSelector).text().replace('m', '').trim(), 10);
     return {
