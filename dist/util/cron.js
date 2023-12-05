@@ -38,6 +38,7 @@ function TatrySuperSkiRegion() {
         }
     });
 }
+TatrySuperSkiRegion();
 function testOne() {
     return __awaiter(this, void 0, void 0, function* () {
         // getAndAddDataToDB(tatrySuperSkiRegions[1].resortId, () => bergregions(tatrySuperSkiRegions[1]));

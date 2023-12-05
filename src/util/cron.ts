@@ -23,6 +23,7 @@ async function TatrySuperSkiRegion() {
     await new Promise((resolve) => setTimeout(resolve, 20000));
   }
 }
+TatrySuperSkiRegion();
 
 async function testOne() {
   // getAndAddDataToDB(tatrySuperSkiRegions[1].resortId, () => bergregions(tatrySuperSkiRegions[1]));
