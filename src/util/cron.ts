@@ -6,7 +6,7 @@ import szczyrkowski from '../resorts/szczyrkowski';
 import cienkow from '../resorts/cienkow';
 import plisko from '../resorts/plisko';
 import karpacz from '../resorts/karpacz';
-import jaworzna from '../resorts/jaworzna';
+import jaworzyna from '../resorts/jaworzyna';
 import bergregions from '../resorts/bergregions';
 import chopok from '../resorts/chopok';
 import cernaHora from '../resorts/cerna-hora';
@@ -61,7 +61,7 @@ function cronJobs() {
     getAndAddDataToDB('karpacz', karpacz);
   });
   schedule(`57 9 * * *`, () => {
-    getAndAddDataToDB('jaworzna', jaworzna);
+    getAndAddDataToDB('jaworzyna', jaworzyna);
   });
   schedule(`59 9 * * *`, () => {
     getAndAddDataToDB('chopok', chopok);

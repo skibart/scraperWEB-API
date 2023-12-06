@@ -32,7 +32,7 @@ function processSlopes($: Function): SlopeObj {
   return slopeObject;
 }
 
-export default async function jaworzna(): Promise<ReadyObj> {
+export default async function jaworzyna(): Promise<ReadyObj> {
   try {
     const response = await axios.get('https://www.pkl.pl/jaworzyna-krynicka/trasy-narciarskie.html');
 
@@ -49,10 +49,10 @@ export default async function jaworzna(): Promise<ReadyObj> {
       slopeQuantity: +slopesArray.slopeQuantity,
       dateEpoch: Date.now(),
       dateLocal: new Date(),
-      name: 'Jaworzna Krynicka',
+      name: 'Jaworzyna Krynicka',
       img: '6.jpg',
       region: 'malopolska',
-      resortId: 'jaworzna',
+      resortId: 'jaworzyna',
     };
   } catch (error: any) {
     console.error('Error:', error.message);

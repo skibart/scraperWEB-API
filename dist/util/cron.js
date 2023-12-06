@@ -20,7 +20,7 @@ const szczyrkowski_1 = __importDefault(require("../resorts/szczyrkowski"));
 const cienkow_1 = __importDefault(require("../resorts/cienkow"));
 const plisko_1 = __importDefault(require("../resorts/plisko"));
 const karpacz_1 = __importDefault(require("../resorts/karpacz"));
-const jaworzna_1 = __importDefault(require("../resorts/jaworzna"));
+const jaworzyna_1 = __importDefault(require("../resorts/jaworzyna"));
 const bergregions_1 = __importDefault(require("../resorts/bergregions"));
 const chopok_1 = __importDefault(require("../resorts/chopok"));
 const cerna_hora_1 = __importDefault(require("../resorts/cerna-hora"));
@@ -74,7 +74,7 @@ function cronJobs() {
         getAndAddDataToDB('karpacz', karpacz_1.default);
     });
     (0, node_cron_1.schedule)(`57 9 * * *`, () => {
-        getAndAddDataToDB('jaworzna', jaworzna_1.default);
+        getAndAddDataToDB('jaworzyna', jaworzyna_1.default);
     });
     (0, node_cron_1.schedule)(`59 9 * * *`, () => {
         getAndAddDataToDB('chopok', chopok_1.default);
