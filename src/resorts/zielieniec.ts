@@ -46,7 +46,7 @@ function processSlopes($: Function): SlopeObj {
     const j = trackIdArr[i - 2];
     const currentSlope = createSlopeObj($, i, j, OPEN_STATUS);
     slopesArray.push(currentSlope);
-    if (currentSlope.status === 'redCell') {
+    if (currentSlope.status === 'open') {
       openSlopesQuanity++;
     }
     slopesQuantity++;
