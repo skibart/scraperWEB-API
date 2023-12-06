@@ -22,6 +22,10 @@ const plisko_1 = __importDefault(require("../resorts/plisko"));
 const karpacz_1 = __importDefault(require("../resorts/karpacz"));
 const jaworzna_1 = __importDefault(require("../resorts/jaworzna"));
 const bergregions_1 = __importDefault(require("../resorts/bergregions"));
+const chopok_1 = __importDefault(require("../resorts/chopok"));
+const cerna_hora_1 = __importDefault(require("../resorts/cerna-hora"));
+const cerny_dul_1 = __importDefault(require("../resorts/cerny-dul"));
+const pec_pod_snezkou_1 = __importDefault(require("../resorts/pec-pod-snezkou"));
 const tatrySuperSki_1 = require("../resorts/tatrySuperSki");
 const saveData_1 = __importDefault(require("../mongodb/saveData"));
 function getAndAddDataToDB(collectionName, resorts) {
@@ -38,14 +42,18 @@ function TatrySuperSkiRegion() {
         }
     });
 }
-TatrySuperSkiRegion();
+// TatrySuperSkiRegion();
 function testOne() {
     return __awaiter(this, void 0, void 0, function* () {
+        const somevalue = yield (0, cerny_dul_1.default)();
+        console.log(somevalue);
+        // getAndAddDataToDB('cerna-hora', cernaHora);
+        getAndAddDataToDB('cerny-dul', cerny_dul_1.default);
         // getAndAddDataToDB(tatrySuperSkiRegions[1].resortId, () => bergregions(tatrySuperSkiRegions[1]));
         // getAndAddDataToDB('zieleniec', fetchZieleniec);
     });
 }
-// testOne();
+testOne();
 function cronJobs() {
     (0, node_cron_1.schedule)(`45 9 * * *`, () => {
         getAndAddDataToDB('czarna-gora', czarna_gora_1.default);
@@ -67,6 +75,18 @@ function cronJobs() {
     });
     (0, node_cron_1.schedule)(`57 9 * * *`, () => {
         getAndAddDataToDB('jaworzna', jaworzna_1.default);
+    });
+    (0, node_cron_1.schedule)(`59 9 * * *`, () => {
+        getAndAddDataToDB('chopok', chopok_1.default);
+    });
+    (0, node_cron_1.schedule)(`01 10 * * *`, () => {
+        getAndAddDataToDB('cerna-hora', cerna_hora_1.default);
+    });
+    (0, node_cron_1.schedule)(`03 10 * * *`, () => {
+        getAndAddDataToDB('cerny-dul', cerny_dul_1.default);
+    });
+    (0, node_cron_1.schedule)(`05 10 * * *`, () => {
+        getAndAddDataToDB('pec-pod-snezkou', pec_pod_snezkou_1.default);
     });
     // schedule(`19 19 * * *`, () => {
     //   TatrySuperSkiRegion();

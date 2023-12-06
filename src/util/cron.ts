@@ -8,6 +8,10 @@ import plisko from '../resorts/plisko';
 import karpacz from '../resorts/karpacz';
 import jaworzna from '../resorts/jaworzna';
 import bergregions from '../resorts/bergregions';
+import chopok from '../resorts/chopok';
+import cernaHora from '../resorts/cerna-hora';
+import cernyDul from '../resorts/cerny-dul';
+import pecPodSnezkou from '../resorts/pec-pod-snezkou';
 import { tatrySuperSkiRegions } from '../resorts/tatrySuperSki';
 import saveToMongoDb from '../mongodb/saveData';
 import { ReadyObj } from '../types/common';
@@ -23,14 +27,19 @@ async function TatrySuperSkiRegion() {
     await new Promise((resolve) => setTimeout(resolve, 20000));
   }
 }
-TatrySuperSkiRegion();
+// TatrySuperSkiRegion();
 
 async function testOne() {
+  const somevalue = await cernyDul();
+  console.log(somevalue);
+
+  // getAndAddDataToDB('cerna-hora', cernaHora);
+  getAndAddDataToDB('cerny-dul', cernyDul);
   // getAndAddDataToDB(tatrySuperSkiRegions[1].resortId, () => bergregions(tatrySuperSkiRegions[1]));
   // getAndAddDataToDB('zieleniec', fetchZieleniec);
 }
 
-// testOne();
+testOne();
 
 function cronJobs() {
   schedule(`45 9 * * *`, () => {
@@ -53,6 +62,18 @@ function cronJobs() {
   });
   schedule(`57 9 * * *`, () => {
     getAndAddDataToDB('jaworzna', jaworzna);
+  });
+  schedule(`59 9 * * *`, () => {
+    getAndAddDataToDB('chopok', chopok);
+  });
+  schedule(`01 10 * * *`, () => {
+    getAndAddDataToDB('cerna-hora', cernaHora);
+  });
+  schedule(`03 10 * * *`, () => {
+    getAndAddDataToDB('cerny-dul', cernyDul);
+  });
+  schedule(`05 10 * * *`, () => {
+    getAndAddDataToDB('pec-pod-snezkou', pecPodSnezkou);
   });
   // schedule(`19 19 * * *`, () => {
   //   TatrySuperSkiRegion();
