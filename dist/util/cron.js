@@ -44,6 +44,7 @@ function testOne() {
         // getAndAddDataToDB('zieleniec', fetchZieleniec);
     });
 }
+TatrySuperSkiRegion();
 // testOne();
 function cronJobs() {
     (0, node_cron_1.schedule)(`45 9 * * *`, () => {

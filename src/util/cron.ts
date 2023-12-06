@@ -28,7 +28,7 @@ async function testOne() {
   // getAndAddDataToDB(tatrySuperSkiRegions[1].resortId, () => bergregions(tatrySuperSkiRegions[1]));
   // getAndAddDataToDB('zieleniec', fetchZieleniec);
 }
-
+TatrySuperSkiRegion();
 // testOne();
 
 function cronJobs() {
